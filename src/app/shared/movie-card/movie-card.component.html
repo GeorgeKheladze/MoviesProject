@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="card">
+    <div class="box">
+      <div class="img">
+        <img src="https://image.tmdb.org/t/p/w500{{moviesInfo.poster_path}}">
+      </div>
+      <div class="content">    
+        <div class="info">
+          <div>
+            <h3>{{moviesInfo.title}}</h3>
+          </div>  
+          <div *ngIf="moviesGenre">
+            <div *ngFor="let genId of moviesInfo.genre_ids">
+              <h4 *ngFor="let gen of moviesGenre.genres">{{ gen.id == genId ? gen.name : '' }}</h4>
+            </div>
+          </div>
+          <div>
+            <h5>IMDb: {{ moviesInfo.vote_average }}</h5> 
+          </div>
+          <div>
+            <p>{{ moviesInfo.release_date }}</p>
+          </div>     
+        </div>
+        <button routerLink="/detail" (click)="onDetail(moviesInfo.id)">View Detail</button>    
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+  

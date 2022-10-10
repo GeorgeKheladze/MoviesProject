@@ -1,0 +1,12 @@
+<div class="container" *ngIf="movie">
+  <div class="poster">
+      <img src="https://image.tmdb.org/t/p/w500{{movie.backdrop_path}}">          
+  </div>
+  <div class="card_content">
+      <div class="title">{{ movie.title }}</div>
+      <div class="date">{{ movie.release_date }}</div>
+      <div class="runtime">{{ movie.runtime | runtime }}</div>
+      <div class="overview">{{ movie.overview }}</div>
+      <button class="btn" routerLink="/">Close</button>
+  </div> 
+</div>

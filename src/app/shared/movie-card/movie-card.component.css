@@ -1,0 +1,122 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 40px 0;
+}
+
+.card {
+  position: relative;
+  min-width: 320px;
+  height: 440px;
+  border-radius: 15px;
+  margin: 30px;
+  transition: 0.5s;
+}
+
+.box {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  background: #2a2b2f;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: 0.4s;
+}
+
+.box:hover .content {
+  transform: translateY(-10px);
+  display: block;
+}
+
+.box:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+img {
+  min-width: 300px;
+  height: 420px;
+  object-fit: cover;
+}
+
+.content {
+  padding: 100%;
+  text-align: center;
+  background-color: rgba(25, 25, 25, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  display: none;
+}
+
+h3 {
+  font-size: 1rem;
+  color: pink;
+  transition: 0.5s;
+  margin-bottom: 0;
+}
+
+h4 {
+  font-size: 0.9rem; 
+  color: lightgreen;
+  transition: 0.5s;
+  line-height: 1;
+}
+
+h5 {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: lightcoral;
+  transition: 0.5s;
+}
+
+p {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: lightskyblue;
+  transition: 0.5s;
+}
+
+button {
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgb(80, 205, 250);
+  border-radius: 4px;
+  border: none;
+  text-decoration: none;
+  color: white;
+  margin-top: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+button:hover {
+  box-shadow: 0 10px 20px rgba(135, 205, 250, 0.1);
+  background: rgb(50, 205, 250);
+  color: rgb(12, 12, 12);
+}

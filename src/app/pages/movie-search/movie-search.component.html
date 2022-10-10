@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="wrap">
+      <form class="search">
+          <input type="text" class="input" #input>
+          <button type="submit" class="search-btn" (click)="onSearch(input)">
+            <i class="fa fa-search"></i>
+          </button> 
+        </form>          
+  </div> 
+  <div class="close" routerLink="">         
+      <i class="fa fa-window-close fa-2x" aria-hidden="true"></i> 
+  </div>
+</div>
+<app-body [contentMovies]="searchedMovies" [contentMoviesGenre]="searchedMoviesGenre">
+  <app-movie-card 
+    *ngFor="let mov of searchedMovies" 
+    [moviesInfo]="mov" 
+    [moviesGenre]="searchedMoviesGenre">
+  </app-movie-card>
+</app-body>
+
+
+
+
+
+
+
+
+
+
+
+
+
