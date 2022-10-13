@@ -8,17 +8,17 @@
 }
 
 button {
-  background-color: rgba(135, 205, 250, 0.9);
-  box-shadow: 0 2px 4px rgb(90, 100, 110);
+  box-shadow: 0 10px 20px rgba(90, 100, 110, 0.3);
+  background: rgba(130, 205, 250, 0.9);
   border: none;
   padding: 8px 20px;
   border-radius: 6px;
-  transition: 0.5s;
+  transition: 0.8s;
   cursor: pointer;
 }
 
 button:hover {
-  box-shadow: 0 10px 20px rgba(90, 100, 110, 0.3);
-  background: rgba(130, 205, 250, 0.9);
+  background-color: rgba(135, 205, 250, 0.9);
+  box-shadow: 0 2px 4px rgb(90, 100, 110);
   color: rgb(12, 12, 12);
 }
