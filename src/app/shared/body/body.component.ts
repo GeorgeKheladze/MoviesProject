@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MoviesGenre, MoviesInfo } from 'src/app/models/movies.model';
+import { Observable } from 'rxjs';
+import { Movies, MoviesGenre, MoviesInfo } from 'src/app/models/movies.model';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -8,20 +9,20 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['./body.component.css']
 })
 export class BodyComponent implements OnInit {
-  @Input() contentMovies!: MoviesInfo [];
-  @Input() contentMoviesGenre!: MoviesGenre;
+  @Input() contentMovies$!: Observable <Movies>;
+  @Input() contentMoviesGenre$!: Observable <MoviesGenre>;
   currentPage: number = 1;
 
   constructor(private movieService: MovieService) { 
-    this.movieService.getMovies(this.currentPage).subscribe((response) => this.contentMovies = response.results);
-    this.movieService.getMoviesGenre().subscribe((response) => this.contentMoviesGenre = response);
+    this.contentMovies$ = this.movieService.getMovies(this.currentPage);
+    this.contentMoviesGenre$ = this.movieService.getMoviesGenre();
   }
 
   ngOnInit(): void {
   }
 
   pageChanged(numb: number) {
-    this.movieService.getMovies(numb).subscribe((response) => this.contentMovies = response.results);
+    this.contentMovies$ = this.movieService.getMovies(numb);
     this.currentPage = numb;
   }
 

@@ -11,12 +11,14 @@
       <i class="fa fa-window-close fa-2x" aria-hidden="true"></i> 
   </div>
 </div>
-<app-body [contentMovies]="searchedMovies" [contentMoviesGenre]="searchedMoviesGenre">
+<app-body *ngIf="searchedMovies$ | async as sMov" [contentMovies$]="searchedMovies$" [contentMoviesGenre$]="searchedMoviesGenre$">
+<div *ngIf="searchedMoviesGenre$ | async as sGen">
   <app-movie-card 
-    *ngFor="let mov of searchedMovies" 
+    *ngFor="let mov of sMov.results" 
     [moviesInfo]="mov" 
-    [moviesGenre]="searchedMoviesGenre">
+    [moviesGenre]="sGen">
   </app-movie-card>
+</div>
 </app-body>
 
 

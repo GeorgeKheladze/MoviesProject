@@ -1,10 +1,12 @@
 <div class="container">
-  <div class="content">
+  <div class="content" *ngIf="contentMovies$ | async as movies">
+    <div class="content" *ngIf="contentMoviesGenre$ | async as cGen">
       <app-movie-card 
-        *ngFor="let mov of contentMovies
+        *ngFor="let mov of movies.results  
         | paginate: {itemsPerPage: 20, currentPage: currentPage, totalItems: 4000 }"
-        [moviesInfo]="mov" [moviesGenre]="contentMoviesGenre">
+        [moviesInfo]="mov" [moviesGenre]="cGen">
       </app-movie-card>
+    </div>
   </div>
   <div>
       <pagination-controls class="my-pagination" 

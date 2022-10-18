@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map, Observable } from 'rxjs';
 import { Movies, MoviesDetail, MoviesGenre } from '../models/movies.model';
@@ -7,14 +7,22 @@ import { Movies, MoviesDetail, MoviesGenre } from '../models/movies.model';
 @Injectable({
   providedIn: 'root'
 })
-export class MovieService {
+export class MovieService implements HttpInterceptor {
   baseUrl = environment.baseUrl;
   apiKey = environment.apyKey;
 
   constructor(private httpClient: HttpClient) { }
 
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const authReq = req.clone({
+      url: this.baseUrl+ req.url + '&api_key='+this.apiKey
+    });
+    console.log(authReq.url)
+    return next.handle(authReq);
+  }
+
   getMovies(pageNumb: number): Observable<Movies> {
-    return this.httpClient.get<Movies>(`${this.baseUrl}discover/movie?api_key=${this.apiKey}&sort_by=popularity.desc&page=${pageNumb}`).pipe(
+    return this.httpClient.get<Movies>(`discover/movie?sort_by=popularity.desc&page=${pageNumb}`).pipe(
       map(response => {
         return {
           ...response,
@@ -30,7 +38,7 @@ export class MovieService {
   }
 
   getMoviesById(id: string): Observable<MoviesDetail> {
-    return this.httpClient.get<MoviesDetail>(`${this.baseUrl}movie/${id}?api_key=${this.apiKey}`).pipe(
+    return this.httpClient.get<MoviesDetail>(`movie/${id}?`).pipe(
       map(response => {
         return {
           ...response, release_date: response.release_date.split('-')[0]
@@ -40,11 +48,11 @@ export class MovieService {
   }
 
   getMoviesGenre(): Observable<MoviesGenre> {
-    return this.httpClient.get<MoviesGenre>(`${this.baseUrl}genre/movie/list?api_key=${this.apiKey}&language=en-US`);
+    return this.httpClient.get<MoviesGenre>(`genre/movie/list?language=en-US`);
   }
 
   searchMovies(input: string): Observable<Movies> {
-    return this.httpClient.get<Movies>(`${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${input}`).pipe(
+    return this.httpClient.get<Movies>(`search/movie?query=${input}`).pipe(
       map(response => {
         return {
           ...response, results: response.results.map(

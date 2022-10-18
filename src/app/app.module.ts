@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { MovieSearchModule } from './pages/movie-search/movie-search.module';
@@ -12,6 +12,7 @@ import { MovieDetailModule } from './pages/movie-detail/movie-detail.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
+import { MovieService } from './services/movie.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,11 @@ import { SharedModule } from './shared/shared.module';
     MovieDetailModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: MovieService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
