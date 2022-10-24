@@ -12,7 +12,7 @@ import { MovieDetailModule } from './pages/movie-detail/movie-detail.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
-import { MovieService } from './services/movie.service';
+import { HttpInterceptInterceptor } from './services/http-intercept.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { MovieService } from './services/movie.service';
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
-    useClass: MovieService,
+    useClass: HttpInterceptInterceptor,
     multi: true
   }],
   bootstrap: [AppComponent]

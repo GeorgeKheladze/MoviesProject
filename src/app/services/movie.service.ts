@@ -1,25 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Movies, MoviesDetail, MoviesGenre } from '../models/movies.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MovieService implements HttpInterceptor {
-  baseUrl = environment.baseUrl;
-  apiKey = environment.apyKey;
+export class MovieService {
 
   constructor(private httpClient: HttpClient) { }
-
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authReq = req.clone({
-      url: this.baseUrl+ req.url + '&api_key='+this.apiKey
-    });
-    console.log(authReq.url)
-    return next.handle(authReq);
-  }
 
   getMovies(pageNumb: number): Observable<Movies> {
     return this.httpClient.get<Movies>(`discover/movie?sort_by=popularity.desc&page=${pageNumb}`).pipe(

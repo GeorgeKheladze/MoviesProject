@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { Movies, MoviesGenre, MoviesInfo } from 'src/app/models/movies.model';
+import { Movies, MoviesGenre } from 'src/app/models/movies.model';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
